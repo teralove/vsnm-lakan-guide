@@ -3,6 +3,8 @@
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
 
+![Screenshot](https://github.com/teralove/vsnm-lakan-guide/blob/master/vsnm-lakan-guide-preview.png)
+
 Available messages:
 
 * **Debuff (closest)**
@@ -33,4 +35,4 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 * Messages without "Next: " means he's doing that mechanic right now.
 * "Next" messages are sent 10s after he does an attack and after he says a message ('Lakan has noticed you', etc).
 
-![Screenshot](https://github.com/teralove/vsnm-lakan-guide/blob/master/vsnm-lakan-guide-preview.png)
+
