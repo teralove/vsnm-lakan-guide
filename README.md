@@ -13,10 +13,10 @@ Available messages:
 * **Debuff (furthest)**
 * **Gather**
 * **Gather + no cleanse**
-* **Get out** for Begone! (Purple)
-* **Get in** for Begone! (Red/Orange)
-* **Ring soon, get ready to dodge** a warning at 35% for the 30% phase
-* **Dodge + plague/regress** for the ring and shield at 30%
+* **Get out**  - for Begone! (Purple)
+* **Get in**  - for Begone! (Red/Orange)
+* **Ring soon, get ready to dodge**  - a warning at 35% for the 30% phase
+* **Dodge + plague/regress**  - for the ring and shield at 30%
 
 
 ### Chat commands:
