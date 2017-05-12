@@ -27,7 +27,8 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 
 
 ### Known issues
-* Don't know yet
+* There might be a missing "Next" message right after 30%
+* Don't know what else yet
 
 
 ### Info:
