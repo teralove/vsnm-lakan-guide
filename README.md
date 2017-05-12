@@ -1,4 +1,4 @@
-**Early version (1.0), Hasn't been thorougly tested, so there might be bugs (probably). It'll take a couple days to know for sure. So you might want to wait until then.**
+**!!! Warning: Early version (1.0), Hasn't been thorougly tested, so there might be bugs (probably). It'll take a couple days to know for sure. So you might want to wait until then. !!!**
 
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
@@ -33,4 +33,4 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 * Messages without "Next: " means he's doing that mechanic right now.
 * "Next" messages are sent 10s after he does an attack and after he says a message ('Lakan has noticed you', etc).
 
-![Screenshot]()
+![Screenshot](https://github.com/teralove/vsnm-lakan-guide/blob/master/vsnm-lakan-guide-preview.png)
