@@ -37,3 +37,7 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 * "Next" messages are sent 10s after he does an attack and after he says a message ('Lakan has noticed you', etc).
 
 
+## Changelog 
+### 1.0.1
+* [+] Fixed minor bug where toggling messages to party/self would say the wrong one.
+
