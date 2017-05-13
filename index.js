@@ -1,4 +1,4 @@
-// vers 1.0.0
+// vers 1.0.1
 
 const format = require('./format.js');
 
@@ -76,7 +76,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 
 	function toggleSentMessages() {
 		sendToParty = !sendToParty;
-		systemMessage((sendToParty ? 'Only you will see messages' : 'Messages will be sent to the party'));
+		systemMessage((sendToParty ? 'Messages will be sent to the party' : 'Only you will see messages'));
 	}	
 	
 	dispatch.hook('S_DUNGEON_EVENT_MESSAGE', 1, (event) => {	
