@@ -1,5 +1,3 @@
-**!!! Warning: Early version (1.0), Hasn't been thorougly tested, so there might be bugs (probably). It'll take a couple days to know for sure. So you might want to wait until then. !!!**
-
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
 
