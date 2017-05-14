@@ -1,4 +1,4 @@
-// vers 1.0.1
+// vers 1.1.0
 
 const format = require('./format.js');
 
@@ -6,29 +6,28 @@ const BossId = [781, 3000]; // Lakan NM
 
 //MessageId: BossAction
 const BossMessages = {
-	9781043: 1192035708,	// Lakan has noticed you.
-	9781044: 1192037407,	// Lakan is trying to take you on one at a time.
-	9781045: 1192035605		// Lakan intends to kill all of you at once.
+	9781043: 1192035708,    // Lakan has noticed you.
+	9781044: 1192037407,    // Lakan is trying to take you on one at a time.
+	9781045: 1192035605     // Lakan intends to kill all of you at once.
 };
 
 const BossActions = {
-	1192035448: {msg: 'Get out'},	// Begone orange
-	1192035449: {msg: 'Get in'},	// Begone purple
+	1192035448: {msg: 'Get out'},                // Begone purple
 	1192035705: {msg: 'Dodge + plague/regress'}, // Shield
-	
-	1192035708: {msg: 'Debuff (closest)', 		next: 1192037407}, // Debuff
-	1192037407: {msg: 'Spread', 				next: 1192035605}, // Spread aka Circles
-	1192035605: {msg: 'Gather + cleanse', 		next: 1192035708}, // Gather
-	
-	1192035709: {msg: 'Debuff (furthest)', 		next: 1192035606}, // Debuff
-	1192037409: {msg: 'Gather', 				next: 1192035709}, // Spread aka Circles
-	1192035606: {msg: 'Gather + no cleanse', 	next: 1192037409}, // Gather
+	// > 30%
+	1192035708: {msg: 'Debuff (closest)',    next: 1192037407,    prev: 1192035605}, // Debuff
+	1192037407: {msg: 'Spread',              next: 1192035605,    prev: 1192035708}, // Spread aka Circles
+	1192035605: {msg: 'Gather + cleanse',    next: 1192035708,    prev: 1192037407}, // Gather
+	// < 30%
+	1192035709: {msg: 'Debuff (furthest)',   next: 1192035606}, // Debuff
+	1192037409: {msg: 'Gather',              next: 1192035709}, // Spread aka Circles
+	1192035606: {msg: 'Gather + no cleanse', next: 1192037409}, // Gather
 };
 
 const InversedAction = {
 	1192035708: 1192035709,
 	1192037407: 1192037409,
-	1192035605: 1192035605
+	1192035605: 1192035606
 };
 
 const ShieldWarningTrigger = 0.35; //boss hp%
@@ -38,20 +37,20 @@ module.exports = function VSNMLakanGuide(dispatch) {
 	
 	let enabled = true,
 	sendToParty = false,
-	playerName,
+	showNextMechanicMessage = true,
 	boss,
 	shieldWarned,
-	showNextMechanicMessage = true,
 	timerNextMechanic, 
-	lastMechanicAction;
+	lastNextAction,
+	isReversed;
 		
     const chatHook = event => {		
 		let command = format.stripTags(event.message).split(' ');
 		
-		if (['!vsnm-lakan'].includes(command[0].toLowerCase())) {
+		if (['!vsnm-lakan', '!vsnmlakan'].includes(command[0].toLowerCase())) {
 			toggleModule();
 			return false;
-		} else if (['!vsnm-lakan.party'].includes(command[0].toLowerCase())) {
+		} else if (['!vsnm-lakan.party', '!vsnmlakan.party'].includes(command[0].toLowerCase())) {
 			toggleSentMessages();
 			return false;
 		}
@@ -64,7 +63,9 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		const Slash = require('slash')
 		const slash = new Slash(dispatch)
 		slash.on('vsnm-lakan', args => toggleModule())
+		slash.on('vsnmlakan', args => toggleModule())
 		slash.on('vsnm-lakan.party', args => toggleSentMessages())
+		slash.on('vsnmlakan.party', args => toggleSentMessages())
 	} catch (e) {
 		// do nothing because slash is optional
 	}
@@ -84,7 +85,9 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		
 		let msgId = parseInt(event.message.replace('@dungeon:', ''));
 		if (BossMessages[msgId]) {
+			if (timerNextMechanic) clearTimeout(timerNextMechanic);
 			sendMessage('Next: ' + BossActions[BossMessages[msgId]].msg);
+			(bossHealth() > 0.5) ? isReversed = false : isReversed = true;
 		}
 	})
 	
@@ -107,7 +110,9 @@ module.exports = function VSNMLakanGuide(dispatch) {
 				sendMessage(ShieldWarningMessage);
 				shieldWarned = true;
 			} else if (bossHp <= 0) {
-				boss = null;
+				boss = undefined;
+				lastNextAction = undefined;
+				isReversed = false;
 				clearTimeout(timerNextMechanic);
 			}
 		}
@@ -123,14 +128,15 @@ module.exports = function VSNMLakanGuide(dispatch) {
 				if (!showNextMechanicMessage) return;
 
 				let nextMessage;
-				if (BossActions[event.skill].next) {
+				if (isReversed && BossActions[event.skill].prev) {                       // 50% to 30%
+					nextMessage = BossActions[BossActions[event.skill].prev].msg;
+					startTimer('Next: ' + nextMessage);
+					lastNextAction = BossActions[event.skill].prev;
+				} else if (BossActions[event.skill].next) {                              // 100% to 50% and 30% to 0%
 					nextMessage = BossActions[BossActions[event.skill].next].msg;
-				} else if (event.skill == 1192035705) { // Shield (Mechanics inversed)
-					nextMessage = BossActions[InversedAction[lastMechanicAction]].msg;
-				}
-				
-				if (nextMessage) {
-					lastMechanicAction = event.skill;
+					startTimer('Next: ' + nextMessage);
+				} else if (event.skill == 1192035705) {                                  // Shield (Mechanics inversing)
+					nextMessage = BossActions[InversedAction[lastNextAction]].msg;
 					startTimer('Next: ' + nextMessage);
 				}
 			}			
@@ -142,21 +148,15 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		timerNextMechanic = setTimeout(() => {
 			sendMessage(message);
 			timerNextMechanic = null;
-		}, 10000);	
+		}, 8000);	
 	}
-	
-	dispatch.hook('S_LOGIN', 2, (event) => {
-		playerName = event.name;
-	})
-		
+
 	function sendMessage(msg) {
 		if (!enabled) return;
 		
 		if (sendToParty) {
-			dispatch.toServer('C_CHAT', {
-				channel: 21, //p-notice
-				//authorName: 'DG-Guide',
-				authorName: playerName,
+			dispatch.toServer('C_CHAT', 1, {
+				channel: 21, //21 = p-notice, 1 = party
 				message: msg
 			});
 		} else {
