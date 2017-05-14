@@ -13,6 +13,7 @@ const BossMessages = {
 
 const BossActions = {
 	1192035448: {msg: 'Get out'},                // Begone purple
+	1192035449: {msg: 'Get in'},                 // Begone orange
 	1192035705: {msg: 'Dodge + plague/regress'}, // Shield
 	// > 30%
 	1192035708: {msg: 'Debuff (closest)',    next: 1192037407,    prev: 1192035605}, // Debuff
