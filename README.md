@@ -20,8 +20,8 @@ Available messages:
 
 
 ### Chat commands:
-* **!VSNM-Lakan** - Toggles the module off/on
-* **!VSNM-Lakan.party** - Toggles sending messages to party/yourself (yourself is default)
+* **!VSNM-Lakan** or **!VSNMLakan** - Toggles the module off/on
+* **!VSNM-Lakan.party** or **!VSNMLakan.party** - Toggles sending messages to party/yourself (yourself is default)
 
 Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) is supported but not required
 
