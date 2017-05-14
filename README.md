@@ -1,4 +1,4 @@
-**New Version 1.1 - Fixed some bugs**
+**New Version 1.1 - Fixed some bugs (Sometimes calling out wrong mechanic) and added some other little improvments**
 
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
@@ -40,6 +40,7 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 ## 1.1
 * [+] Fixed bug: Right after 50% it would send the same "Next" message twice.
 * [+] Fixed bug: After 50% the 2nd and following "Next" messages would be wrong.
+* [+] Fixed bug: After 30% the inverse message for 'Gather and cleanse' was wrong.
 * [+] Added a "Next" message right after 30% mechanic in regard to pattern inversal.
 * [+] Added command varations without the hyphen (dash).
 * [-] Removed player name variable cause it was not doing anything.
