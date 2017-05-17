@@ -1,5 +1,3 @@
-**New Version 1.1 - Fixed some bugs (Sometimes calling out wrong mechanic) and added some other little improvments**
-
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
 
@@ -26,10 +24,6 @@ Available messages:
 Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) is supported but not required
 
 
-### Known issues
-* None that I'm aware of.
-
-
 ### Info:
 * Messages starting with "Next: " are there to give you a heads up for what's coming.
 * Messages without "Next: " means he's doing that mechanic right now.
@@ -37,6 +31,8 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 
 
 ## Changelog 
+## 1.1.1
+* [+] Fixed bug: If you skipped a mechanic by pushing boss too fast from 50% to 30% an error would be thrown.
 ## 1.1
 * [+] Fixed bug: Right after 50% it would send the same "Next" message twice.
 * [+] Fixed bug: After 50% the 2nd and following "Next" messages would be wrong.

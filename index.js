@@ -1,4 +1,4 @@
-// vers 1.1.0
+// vers 1.1.1
 
 const format = require('./format.js');
 
@@ -136,6 +136,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 				} else if (BossActions[event.skill].next) {                              // 100% to 50% and 30% to 0%
 					nextMessage = BossActions[BossActions[event.skill].next].msg;
 					startTimer('Next: ' + nextMessage);
+					lastNextAction = BossActions[event.skill].next;
 				} else if (event.skill == 1192035705) {                                  // Shield (Mechanics inversing)
 					nextMessage = BossActions[InversedAction[lastNextAction]].msg;
 					startTimer('Next: ' + nextMessage);
