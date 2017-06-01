@@ -1,3 +1,5 @@
+**Updated June 1, 2017 - Version 1.1.2**
+
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
 
@@ -31,6 +33,8 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 
 
 ## Changelog 
+## 1.1.2
+* [+] Fixed bug: The first "Next" message after pushing 30% phase would be wrong.
 ## 1.1.1
 * [+] Fixed bug: If you skipped a mechanic by pushing boss too fast from 50% to 30% an error would be thrown.
 ## 1.1
@@ -42,4 +46,3 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 * [-] Removed player name variable cause it was not doing anything.
 ### 1.0.1
 * [+] Fixed minor bug where toggling messages to party/self would say the wrong one.
-

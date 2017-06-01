@@ -1,4 +1,4 @@
-// vers 1.1.1
+// vers 1.1.2
 
 const format = require('./format.js');
 
@@ -37,15 +37,15 @@ const ShieldWarningMessage = 'Ring soon, get ready to dodge';
 module.exports = function VSNMLakanGuide(dispatch) {
 	
 	let enabled = true,
-	sendToParty = false,
-	showNextMechanicMessage = true,
-	boss,
-	shieldWarned,
-	timerNextMechanic, 
-	lastNextAction,
-	isReversed;
+		sendToParty = false,
+		showNextMechanicMessage = true,
+		boss,
+		shieldWarned,
+		timerNextMechanic, 
+		lastAction,
+		isReversed;
 		
-    const chatHook = event => {		
+	const chatHook = event => {		
 		let command = format.stripTags(event.message).split(' ');
 		
 		if (['!vsnm-lakan', '!vsnmlakan'].includes(command[0].toLowerCase())) {
@@ -112,7 +112,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 				shieldWarned = true;
 			} else if (bossHp <= 0) {
 				boss = undefined;
-				lastNextAction = undefined;
+				lastAction = undefined;
 				isReversed = false;
 				clearTimeout(timerNextMechanic);
 			}
@@ -132,13 +132,13 @@ module.exports = function VSNMLakanGuide(dispatch) {
 				if (isReversed && BossActions[event.skill].prev) {                       // 50% to 30%
 					nextMessage = BossActions[BossActions[event.skill].prev].msg;
 					startTimer('Next: ' + nextMessage);
-					lastNextAction = BossActions[event.skill].prev;
+					lastAction = event.skill;
 				} else if (BossActions[event.skill].next) {                              // 100% to 50% and 30% to 0%
 					nextMessage = BossActions[BossActions[event.skill].next].msg;
 					startTimer('Next: ' + nextMessage);
-					lastNextAction = BossActions[event.skill].next;
+					lastAction = event.skill;
 				} else if (event.skill == 1192035705) {                                  // Shield (Mechanics inversing)
-					nextMessage = BossActions[InversedAction[lastNextAction]].msg;
+					nextMessage = BossActions[InversedAction[lastAction]].msg;
 					startTimer('Next: ' + nextMessage);
 				}
 			}			
