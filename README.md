@@ -1,4 +1,4 @@
-**Updated June 1, 2017 - Version 1.1.2**
+**The Hard Mode version can be found here: https://github.com/teralove/vshm-lakan-guide**
 
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
