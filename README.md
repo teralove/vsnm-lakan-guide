@@ -1,5 +1,7 @@
 **The Hard Mode version can be found here: https://github.com/teralove/vshm-lakan-guide**
 
+**The next message after 30% bug is still present**
+
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
 
@@ -34,7 +36,7 @@ Commands are not case-sensitive. [slash](https://github.com/baldera-mods/slash) 
 
 ## Changelog 
 ## 1.1.2
-* [+] Fixed bug: The first "Next" message after pushing 30% phase would be wrong.
+* [+] ~~Fixed bug: The first "Next" message after pushing 30% phase would be wrong.~~
 ## 1.1.1
 * [+] Fixed bug: If you skipped a mechanic by pushing boss too fast from 50% to 30% an error would be thrown.
 ## 1.1
