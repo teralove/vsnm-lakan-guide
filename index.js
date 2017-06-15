@@ -1,4 +1,4 @@
-// vers 1.1.2
+// vers 1.1.3
 
 const format = require('./format.js');
 
@@ -137,7 +137,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 					nextMessage = BossActions[BossActions[event.skill].next].msg;
 					startTimer('Next: ' + nextMessage);
 					lastAction = event.skill;
-				} else if (event.skill == 1192035705) {                                  // Shield (Mechanics inversing)
+				} else if (event.skill == 1192035705 && lastAction) {                                  // Shield (Mechanics inversing)
 					nextMessage = BossActions[InversedAction[lastAction]].msg;
 					startTimer('Next: ' + nextMessage);
 				}
